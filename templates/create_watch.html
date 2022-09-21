@@ -1,0 +1,14 @@
+{% extends "index.html" %}
+
+{% block title %}
+    Create a watch
+{% endblock %}
+
+{% block main %}
+    <form action="/create_watch" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="watch_name" name="watch_name" placeholder="Watch name" type = "text">
+        </div>
+    </form>
+
+{% endblock %}

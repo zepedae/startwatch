@@ -60,6 +60,7 @@ function stopWatch(){
 
 }
 
+
 function startStop(){
     if(status === "stopped"){
         //Start stopwatch 
@@ -71,30 +72,36 @@ function startStop(){
         window.clearInterval(interval);
         document.getElementById("startStop").innerHTML = "Start";
         status = "stopped";
-    }
 
-}
-
-function submit(){
-    if(status === "stopped"){
-
-        var time = document.getElementById("display").innerHTML;
-        console.log(time);
+        function submit() {
+            if (status = "stopped"){
+                
+                var time = document.getElementById("display").innerHTML;
         
-        $.ajax({
-            //type: "POST",
-            url: "/watches",
-            data: {"time": time},
-            success: function(response) {
-                console.log(response);
-            }, 
-            error: function(error){
-                console.log(error);
+                fetch('/watches', {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+        
+                    method: 'POST',
+        
+                    body: JSON.stringify({'time_elapsed': time})
+        
+                }).then(function (response){
+                    return response.text();
+                }).then(function (text) {
+                    console.log('bloop');
+        
+                    console.log("blap")
+                });
             }
-        });
+        }
+        submit();
     }
 }
 
+       
+   
 function reset(){
     window.clearInterval(interval);
     seconds = 0;

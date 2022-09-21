@@ -1,5 +1,4 @@
 #to activate virtual environment 
-#python3 -m venv .venv
 #source .venv/bin/activate
 
 #install flask
@@ -8,7 +7,7 @@
 #install mysql connector
 #pip install mysql-connector-python
 
-# mysql -p then enter to connect to sql database
+# mysql -p (esc) then enter to connect to sql database
 
 import os
 import mysql.connector
@@ -16,7 +15,7 @@ import time
 import json
 
 from flask import Flask, render_template, request, session, redirect, jsonify
-#from flask_session.__init__ import Session
+from flask_session.__init__ import Session
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import date
@@ -24,7 +23,7 @@ from datetime import date
 from helpers import apology, login_required
 
 #Create object using mysql connector
-conn = mysql.connector.connect(host="localhost", database="startwatch", user="root", password="Redd!tisl13fe")
+conn = mysql.connector.connect(host="localhost", database="startwatch", user="root", password="slamdunk")
 
 #Configure application
 app = Flask(__name__)
@@ -110,7 +109,7 @@ def login():
             session['loggedin'] = True
             session['id'] = user['id']
             session['username'] = user['username']
-            return render_template("watches.html")
+            return render_template("stopwatch.html")
             
 
     else:
@@ -127,38 +126,42 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/watches", methods = ["GET", "POST"])
+@app.route("/stopwatch", methods = ["GET", "POST"])
 @login_required
-def watches():
+def stopwatch():
     if request.method == "POST":
-        time = request.args.get("time")
-        time_elapsed = time['time']
+        data = request.get_json()
+        data = jsonify(data)
+    
+        return render_template("stopwatch.html", bloop = data)
 
-        return render_template("watches.html", bloop = time_elapsed)
+        # time = request.args.get("time")
+        # time_elapsed = time['time']
 
-        user_id = session['id']
-        watch_name = "project 1"
+        # return render_template("watches.html", bloop = time_elapsed)
 
-        date = date.today()
+        # user_id = session['id']
+        # watch_name = "project 1"
 
-        cursor = conn.cursor(dictionary = True, buffered = True)
-        cursor.execute("SELECT date FROM watches WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id, ))
-        last_date = cursor.fetchone()
+        # date = date.today()
 
-        cursor.close()
+        # cursor = conn.cursor(dictionary = True, buffered = True)
+        # cursor.execute("SELECT date FROM watches WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id, ))
+        # last_date = cursor.fetchone()
+
+        # cursor.close()
         
-        if not last_date or last_date['date'] < date:
-            cursor = conn.cursor(dictionary = True, buffered = True)
-            cursor.execute("INSERT INTO watches (user_id, watch_name, date, time_elapsed VALUES (%s, %s, %s, %s)", (user_id, watch_name, date, time_elapsed, ))
-            conn.commit()
-            cursor.close()
+        # if not last_date or last_date['date'] < date:
+        #     cursor = conn.cursor(dictionary = True, buffered = True)
+        #     cursor.execute("INSERT INTO watches (user_id, watch_name, date, time_elapsed VALUES (%s, %s, %s, %s)", (user_id, watch_name, date, time_elapsed, ))
+        #     conn.commit()
+        #     cursor.close()
 
-        else:
-            cursor = conn.cursor(dictionary = True, buffered = True)
-            cursor.execute("UPDATE watches SET time = ADDTIME(time + %s) WHERE id = %s AND date = %s", (time_elapsed, user_id, date, ))
-            conn.commit()
-            cursor.close()
+        # else:
+        #     cursor = conn.cursor(dictionary = True, buffered = True)
+        #     cursor.execute("UPDATE watches SET time = ADDTIME(time + %s) WHERE id = %s AND date = %s", (time_elapsed, user_id, date, ))
+        #     conn.commit()
+        #     cursor.close()
 
-    return render_template("watches.html")
-
+    #return render_template("watches.html")
 
