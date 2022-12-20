@@ -23,6 +23,9 @@ from datetime import date
 
 from helpers import apology, login_required
 
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
 #Create object using mysql connector
 conn = mysql.connector.connect(host="localhost", database="startwatch", user="root", password="slamdunk")
 
@@ -130,18 +133,22 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/stopwatch", methods = ["POST", "GET"])
+@app.route("/stopwatch", methods = ["GET", "POST"])
 @login_required
 def stopwatch():
-    if request.method == "POST":
-        data = request.form['display']
-        # bloop = jsonify(data)
-        # print(bloop)
+    return render_template("stopwatch.html")
+    # if request.method == "GET":
+    #     # url = "http://127.0.0.1:5000/stopwatch"
+    #     # html = urlopen(url).read()
 
-        return render_template("stopwatch.html", time = data)
+    #     #resp = request.get("http://127.0.0.1:5000/stopwatch")
+    #     #txt = resp.txt
+    #     #soup = BeautifulSoup(txt, "lxml")
+    #     #time = soup.text()
 
-    else:
-        return render_template("stopwatch.html", time = "bloop")
+    #     return render_template("stopwatch.html", time = 'bloop')
+    # else:
+    #     return render_template("stopwatch.html", time = 'bloop')
 
 
 @app.route("/create_watch", methods = ["GET", "POST"])

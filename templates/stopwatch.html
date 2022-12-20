@@ -6,16 +6,14 @@
 
 {% block main %}
     <div class = "container">
-            <form action = "/stopwatch" method = "post">
-                <div id = "display" name = "display">
-                    00:00:00
-                </div>
-                <div class = "buttons">
-                    <button id = "startStop" name = "startStop" type= "submit">Start</button>
-                    <button id = "reset">Reset</button>
-                </div>
-            </form>
-            <p>Time-elapsed: {{ time }} </p>   
+        <h1 id = "display" name = "display">
+            00:00:00
+        </h1>
+        <div class = "buttons">
+            <button id = "startStop">Start</button>
+            <button id = "reset">Reset</button>
+        </div>
+        <p>Time-elapsed: {{ time }} </p>   
     </div>
 {% endblock %}
 

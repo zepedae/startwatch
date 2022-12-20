@@ -15,17 +15,13 @@ let interval = null;
 let state = "stopped";
 
 //Add event listener for start/stop button
-document.querySelector("#startStop").addEventListener('click', stopWatch, false);
+document.querySelector('#startStop').addEventListener('click', startStop);
 
 //Add event listener for reset button
-const reset = document.querySelector("#reset");
-reset.addEventListener('click', reset, false);
-
-console.log(startStop, reset);
+document.querySelector("#reset").addEventListener('click', reset);
 
 //Stopwatch function (`12345e6789 `gic to determine when to increment next value, etc.)
 function stopWatch(){
-
     seconds++;
 
     //logic to determine when to increment next value
@@ -66,7 +62,6 @@ function stopWatch(){
 
     //Display updated time values to user
     document.getElementById("display").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
-
 }
 
 function startStop(){
@@ -78,30 +73,11 @@ function startStop(){
     }
     else{
         document.getElementById("startStop").innerHTML = "Start";
-        // submit();
         window.clearInterval(interval);
         state = "stopped";
     }
 }
 
-// function submit() {
-
-//     const time = {"time_elapsed": String(document.getElementById("display").innerHTML)};
-//     console.log(time);
-
-//     fetch("/template/stopwatch", {
-//         method: "POST",
-//         headers: {"Content-Type": "application/json",
-//         body: JSON.stringify(time)}
-//     }).then((response) => response.json())
-//     .then((data) => {
-//         console.log('Success:', time);
-//     })
-//     .catch((error) => {
-//         console.error('Error:', error);
-//     });
-// }
-   
 function reset(){
     window.clearInterval(interval);
     seconds = 0;
