@@ -1,21 +1,22 @@
 {% extends "index.html" %}
 
 {% block title %}
-    Stopwatches
+    Stopwatch
 {% endblock %} 
 
 {% block main %}
-<div class = "container">
-        <div id = "display">
-            {{ watch_name }} <br>
-            00:00:00
-        </div>
-        <div class = "buttons">
-            <button id = "startStop" onclick="startStop()">Start</button> 
-            <button id = "reset" onclick="reset()">Reset</button>
-        </div>
-</div>
-<p id = "bloop">{{ bloop }}</p>
+    <div class = "container">
+            <form action = "/stopwatch" method = "post">
+                <div id = "display" name = "display">
+                    00:00:00
+                </div>
+                <div class = "buttons">
+                    <button id = "startStop" name = "startStop" type= "submit">Start</button>
+                    <button id = "reset">Reset</button>
+                </div>
+            </form>
+            <p>Time-elapsed: {{ time }} </p>   
+    </div>
 {% endblock %}
 
 {% block javascript %}

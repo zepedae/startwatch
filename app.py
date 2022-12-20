@@ -2,10 +2,10 @@
 #source .venv/bin/activate
 
 #install flask
-#pip install flask
+#pip3 install flask
 
 #install mysql connector
-#pip install mysql-connector-python
+#pip3 install mysql-connector-python
 
 # mysql -p (esc) then enter to connect to sql database
 
@@ -16,6 +16,7 @@ import json
 
 from flask import Flask, render_template, request, session, redirect, jsonify
 from flask_session.__init__ import Session
+from flask_cors import CORS
 from tempfile import mkdtemp
 from werkzeug.security import check_password_hash, generate_password_hash
 from datetime import date
@@ -27,6 +28,9 @@ conn = mysql.connector.connect(host="localhost", database="startwatch", user="ro
 
 #Configure application
 app = Flask(__name__)
+
+#Set up Flask to bypass CORS at the front end
+cors = CORS(app)
 
 # Ensure templates are auto-reloaded
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -126,42 +130,41 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/stopwatch", methods = ["GET", "POST"])
+@app.route("/stopwatch", methods = ["POST", "GET"])
 @login_required
 def stopwatch():
     if request.method == "POST":
-        data = request.get_json()
-        data = jsonify(data)
-    
-        return render_template("stopwatch.html", bloop = data)
+        data = request.form['display']
+        # bloop = jsonify(data)
+        # print(bloop)
 
-        # time = request.args.get("time")
-        # time_elapsed = time['time']
+        return render_template("stopwatch.html", time = data)
 
-        # return render_template("watches.html", bloop = time_elapsed)
+    else:
+        return render_template("stopwatch.html", time = "bloop")
 
-        # user_id = session['id']
-        # watch_name = "project 1"
 
-        # date = date.today()
+@app.route("/create_watch", methods = ["GET", "POST"])
+@login_required
+def create_watch():
+    if request.method == "POST":
+        if not request.form['watch_name']:
+            apology("Enter watch name", 400)
+        else:
+            username = session['username']
+            user_id = session['id']
+            watch_name = request.form['watch_name']
 
-        # cursor = conn.cursor(dictionary = True, buffered = True)
-        # cursor.execute("SELECT date FROM watches WHERE user_id = %s ORDER BY id DESC LIMIT 1", (user_id, ))
-        # last_date = cursor.fetchone()
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO watches (username, user_id, watch_name) VALUES (%s, %s, %s)", (username, user_id, watch_name, ) )
+            conn.commit()
 
-        # cursor.close()
-        
-        # if not last_date or last_date['date'] < date:
-        #     cursor = conn.cursor(dictionary = True, buffered = True)
-        #     cursor.execute("INSERT INTO watches (user_id, watch_name, date, time_elapsed VALUES (%s, %s, %s, %s)", (user_id, watch_name, date, time_elapsed, ))
-        #     conn.commit()
-        #     cursor.close()
+            added = "{} watch has been added!".format(watch_name)
 
-        # else:
-        #     cursor = conn.cursor(dictionary = True, buffered = True)
-        #     cursor.execute("UPDATE watches SET time = ADDTIME(time + %s) WHERE id = %s AND date = %s", (time_elapsed, user_id, date, ))
-        #     conn.commit()
-        #     cursor.close()
+            return render_template("create_watch.html", added=added)
+    else:
+        return render_template("create_watch.html")
 
-    #return render_template("watches.html")
 
+if __name__ == "__main__": 
+   app.run(debug=True)

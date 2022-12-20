@@ -11,10 +11,19 @@ let displayHours = 0;
 //Variables to hold setInterval() function
 let interval = null;
 
-//Var to hold stopwatch status
-let status = "stopped";
+//Var to hold stopwatch state
+let state = "stopped";
 
-//Stopwatch function (logic to determine when to increment next vlaue, etc.)
+//Add event listener for start/stop button
+document.querySelector("#startStop").addEventListener('click', stopWatch, false);
+
+//Add event listener for reset button
+const reset = document.querySelector("#reset");
+reset.addEventListener('click', reset, false);
+
+console.log(startStop, reset);
+
+//Stopwatch function (`12345e6789 `gic to determine when to increment next value, etc.)
 function stopWatch(){
 
     seconds++;
@@ -60,47 +69,38 @@ function stopWatch(){
 
 }
 
-
 function startStop(){
-    if(status === "stopped"){
+    if(state === "stopped"){
         //Start stopwatch 
         interval = window.setInterval(stopWatch, 1000);
         document.getElementById("startStop").innerHTML = "Stop";
-        status = "started";
+        state = "started";
     }
     else{
-        window.clearInterval(interval);
         document.getElementById("startStop").innerHTML = "Start";
-        status = "stopped";
-
-        function submit() {
-            if (status = "stopped"){
-                
-                var time = document.getElementById("display").innerHTML;
-        
-                fetch('/watches', {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-        
-                    method: 'POST',
-        
-                    body: JSON.stringify({'time_elapsed': time})
-        
-                }).then(function (response){
-                    return response.text();
-                }).then(function (text) {
-                    console.log('bloop');
-        
-                    console.log("blap")
-                });
-            }
-        }
-        submit();
+        // submit();
+        window.clearInterval(interval);
+        state = "stopped";
     }
 }
 
-       
+// function submit() {
+
+//     const time = {"time_elapsed": String(document.getElementById("display").innerHTML)};
+//     console.log(time);
+
+//     fetch("/template/stopwatch", {
+//         method: "POST",
+//         headers: {"Content-Type": "application/json",
+//         body: JSON.stringify(time)}
+//     }).then((response) => response.json())
+//     .then((data) => {
+//         console.log('Success:', time);
+//     })
+//     .catch((error) => {
+//         console.error('Error:', error);
+//     });
+// }
    
 function reset(){
     window.clearInterval(interval);
