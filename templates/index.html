@@ -29,8 +29,8 @@
                 <div class="collapse navbar-collapse" id="navbar">
                     {% if session["loggedin"] %}
                         <ul class="navbar-nav me-auto mt-2">
-                            <li class="nav-item"><a class="nav-link" href="/create_watch">Create a Watch</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/stopwatch">Startwatch</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/create_watch">Create a project</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/projects">Projects</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto mt-2">
                             <li class="nav-item float-right" style="margin: 0 auto;"><a class="nav-link" href="/logout">Log out</a></li>
@@ -56,7 +56,16 @@
             </div>
         </nav>
         <main class="container-fluid py-5 text-center">
-            {% block main %}{% endblock %}
+            {% block main %}
+                <div class="content">
+                    <div class="header">Welcome to Startwatch</div>
+                        <div class="description">Startwatch is a site that tracks users' 
+                            productivity across user-specified projects. Using Startwatch 
+                            you can monitor,track, and visualize the time you spend working
+                            to maximize accountability and efficiency.</div>
+                    </div>
+                </div>
+            {% endblock %}
         </main>
     </body>
     {% block javascript %}{% endblock %}

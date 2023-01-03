@@ -23,9 +23,6 @@ from datetime import date
 
 from helpers import apology, login_required
 
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-
 #Create object using mysql connector
 conn = mysql.connector.connect(host="localhost", database="startwatch", user="root", password="slamdunk")
 
@@ -82,6 +79,8 @@ def register():
             cursor.execute("INSERT INTO users (username, password) VALUES (%s, %s)", (username, password,) )
             conn.commit()
         
+        cursor.close()
+        
         return redirect("/")
 
     else:
@@ -106,6 +105,7 @@ def login():
         password = request.form['password']
         cursor = conn.cursor(dictionary = True, buffered = True)
         cursor.execute("SELECT * FROM users WHERE username = %s", (username, ))
+        cursor.close()
         user = cursor.fetchone()
 
         # Log in if user exists
@@ -116,7 +116,7 @@ def login():
             session['loggedin'] = True
             session['id'] = user['id']
             session['username'] = user['username']
-            return render_template("stopwatch.html")
+            return redirect("/")
             
 
     else:
@@ -136,19 +136,34 @@ def logout():
 @app.route("/stopwatch", methods = ["GET", "POST"])
 @login_required
 def stopwatch():
-    return render_template("stopwatch.html")
-    # if request.method == "GET":
-    #     # url = "http://127.0.0.1:5000/stopwatch"
-    #     # html = urlopen(url).read()
+    if request.method == "POST":
+        data = request.get_json()
 
-    #     #resp = request.get("http://127.0.0.1:5000/stopwatch")
-    #     #txt = resp.txt
-    #     #soup = BeautifulSoup(txt, "lxml")
-    #     #time = soup.text()
+        time = data.get('time_elapsed')
+        project = data.get('project_name')
+        user_id = session['id']
+        today = date.today()
 
-    #     return render_template("stopwatch.html", time = 'bloop')
-    # else:
-    #     return render_template("stopwatch.html", time = 'bloop')
+        cursor = conn.cursor(dictionary = True, buffered = True)
+        cursor.execute("SELECT date FROM times WHERE user_id=%s AND watch_name=%s ORDER BY id DESC LIMIT 1", (user_id, project, ))
+        last_date = cursor.fetchone()
+        cursor.close()
+
+        if not last_date or last_date['date'] < today:
+            cursor = conn.cursor(dictionary = True, buffered = True)
+            cursor.execute("INSERT INTO times (user_id, watch_name, time_elapsed) VALUES (%s, %s, %s)", (user_id, project, time, ) )
+            conn.commit()
+            cursor.close()
+        else:
+            cursor = conn.cursor(dictionary=True, buffered=True)
+            cursor.execute("UPDATE times SET time_elapsed=%s WHERE user_id=%s AND date=%s AND watch_name=%s", (time, user_id, today, project, ))
+            conn.commit()
+            cursor.close()
+
+        return 'OK', 200
+   
+    else:
+        return render_template("stopwatch.html")
 
 
 @app.route("/create_watch", methods = ["GET", "POST"])
@@ -165,12 +180,40 @@ def create_watch():
             cursor = conn.cursor()
             cursor.execute("INSERT INTO watches (username, user_id, watch_name) VALUES (%s, %s, %s)", (username, user_id, watch_name, ) )
             conn.commit()
+            cursor.close()
 
             added = "{} watch has been added!".format(watch_name)
 
             return render_template("create_watch.html", added=added)
     else:
         return render_template("create_watch.html")
+
+
+@app.route("/projects", methods = ["GET", "POST"])
+@login_required
+def projects():
+    if request.method == "GET":
+        user_id = session['id']
+
+        cursor = conn.cursor(buffered=True)
+        cursor.execute("SELECT watch_name FROM watches WHERE user_id = %s", (user_id, ))
+        names = cursor.fetchall()
+        cursor.close()
+        
+
+        return render_template("projects.html", names = names)
+
+    else:
+        if "stopwatch" in request.form:
+            return render_template("stopwatch.html", project_name = request.form['stopwatch'])
+        #elseif "visualize" in request.form:
+            #return render_template("visualize.html", project_name = request.form['visualize'])
+        #finish with edit
+
+
+
+
+    
 
 
 if __name__ == "__main__": 

@@ -1,10 +1,11 @@
 {% extends "index.html" %}
 
 {% block title %}
-    Create a watch
+    Create a project
 {% endblock %}
 
 {% block main %}
+    <div class="header">Create a new project</div>
     <form action="/create_watch" method="post">
         <div class="mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="watch_name" name="watch_name" placeholder="Watch name" type = "text">

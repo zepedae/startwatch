@@ -15,10 +15,10 @@ let interval = null;
 let state = "stopped";
 
 //Add event listener for start/stop button
-document.querySelector('#startStop').addEventListener('click', startStop);
+document.getElementById('startStop').addEventListener('click', startStop);
 
 //Add event listener for reset button
-document.querySelector("#reset").addEventListener('click', reset);
+document.getElementById('reset').addEventListener('click', reset);
 
 //Stopwatch function (`12345e6789 `gic to determine when to increment next value, etc.)
 function stopWatch(){
@@ -61,7 +61,7 @@ function stopWatch(){
 
 
     //Display updated time values to user
-    document.getElementById("display").innerHTML = displayHours + ":" + displayMinutes + ":" + displaySeconds;
+    document.getElementById("display").innerHTML= displayHours + ":" + displayMinutes + ":" + displaySeconds;
 }
 
 function startStop(){
@@ -73,9 +73,34 @@ function startStop(){
     }
     else{
         document.getElementById("startStop").innerHTML = "Start";
+        submit();
         window.clearInterval(interval);
         state = "stopped";
     }
+}
+
+function submit() {
+    const data = {"project_name": document.querySelector(".header").innerHTML,"time_elapsed": String(document.getElementById("display").innerText)};
+
+    fetch("/stopwatch", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+    .then(function (response){
+        if(response.ok){
+            response.json()
+            .then(function (response) {
+                console.log(response);
+            });
+        }
+        else {
+            throw Error('Something went wrong');
+        }
+    })
+    .catch(function(error) {
+        console.log(error);
+    });
 }
 
 function reset(){
@@ -86,3 +111,6 @@ function reset(){
     document.getElementById("display").innerHTML = "00:00:00";
     document.getElementById("startStop").innerHTML = "Start";
 }
+
+
+

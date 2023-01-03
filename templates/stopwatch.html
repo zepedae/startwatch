@@ -6,15 +6,14 @@
 
 {% block main %}
     <div class = "container">
-        <h1 id = "display" name = "display">
+        <div class="header">{{ project_name }}</div>
+        <div id = "display">
             00:00:00
-        </h1>
-        <div class = "buttons">
-            <button id = "startStop">Start</button>
-            <button id = "reset">Reset</button>
         </div>
-        <p>Time-elapsed: {{ time }} </p>   
+            <button class="btn btn-primary" id = "startStop">Start</button>
+            <button class="btn btn-primary" id = "reset">Reset</button>
     </div>
+    <p>{{ bloop }}</p>
 {% endblock %}
 
 {% block javascript %}
