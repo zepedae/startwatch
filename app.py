@@ -205,10 +205,33 @@ def projects():
 
     else:
         if "stopwatch" in request.form:
+            session["project"] = request.form.get("stopwatch","")
             return render_template("stopwatch.html", project_name = request.form['stopwatch'])
-        #elseif "visualize" in request.form:
-            #return render_template("visualize.html", project_name = request.form['visualize'])
+        elif "visualize" in request.form:
+            session["project"] = request.form.get("visualize","")
+            return redirect("/visualize")
         #finish with edit
+
+@app.route("/visualize", methods = ["GET", "POST"])
+@login_required
+def visualize():
+    project_name = session["project"]
+    user_id = session["id"]
+    if request.method == "GET":
+        cursor = conn.cursor(buffered=True)
+        cursor.execute("SELECT date, time_elapsed FROM times WHERE user_id = %s AND watch_name = %s", (user_id, project_name))
+        times = cursor.fetchall()
+        cursor.close()
+
+        # timesArr = []
+        # for i in times:
+        #     row = json.dumps(times[i], default = str)
+        #     timesArr.append(row)
+
+        bloop = [1, 2, 3]
+
+        return render_template("visualize.html", times = bloop, project_name = project_name)
+
 
 
 

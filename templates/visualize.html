@@ -1,0 +1,65 @@
+{% extends "index.html" %}
+
+{% block head_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+{% endblock %}
+
+{% block title %}
+    Productivity
+{% endblock %} 
+
+{% block main %}
+    <div class = "container">
+        <div class="header">{{ project_name }}</div>
+        <div>
+            {% for row in times %}
+                <div>{{ row }}</div>
+            {% endfor %}
+        </div>
+        <canvas id="myChart" width="400" height="400"></canvas>
+        <div>{{ times[0][0] }}</div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    (async function() {
+        const dateTimes = JSON.parse("{{ times | tojson | safe }}");
+        console.log(dataTimes);
+        let data = [];
+        for(let i=0; i< dateTimes.length-1; i++){
+            data.push = {
+                date: dateTimes[i][0],
+                time: dateTimes[i][1]
+            }
+        };
+
+// 
+//     const data = [
+//       { year: 2010, count: 10 },
+//       { year: 2011, count: 20 },
+//       { year: 2012, count: 15 },
+//       { year: 2013, count: 25 },
+//       { year: 2014, count: 22 },
+//       { year: 2015, count: 30 },
+//       { year: 2016, count: 28 },
+//     ];
+  
+    new Chart(
+      document.getElementById('myChart'),
+      {
+        type: 'bar',
+        data: {
+          labels: data.map(row => row.date),
+          datasets: [
+            {
+              label: 'Productivity',
+              data: data.map(row => row.time)
+            }
+          ]
+        }
+      }
+    );
+  })();
+</script>
+{% endblock %}

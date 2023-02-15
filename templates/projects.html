@@ -10,7 +10,7 @@
             <div class = "project"> {{ row[0] }}
                 <form action="/projects" method="post">
                     <button class="btn btn-primary stopwatch" value="{{ row[0] }}" type="submit" name="stopwatch">Startwatch</button>
-                    <button class="btn btn-primary visualize" value="{{ row[0] }}">Visualize</button>
+                    <button class="btn btn-primary visualize" value="{{ row[0] }}" type="submit" name="visualize">Visualize</button>
                     <button class="btn btn-primary edit" value="{{ row[0] }}">Edit</button>
                 </form>
             </div>
