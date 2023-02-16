@@ -12,14 +12,14 @@ import Chart from 'chart.js/auto';
   ];
 
   new Chart(
-    document.getElementById('acquisitions'),
+    document.getElementById('Chart'),
     {
       type: 'bar',
       data: {
         labels: data.map(row => row.year),
         datasets: [
           {
-            label: 'Acquisitions by year',
+            label: 'Productivity',
             data: data.map(row => row.count)
           }
         ]

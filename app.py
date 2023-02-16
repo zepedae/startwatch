@@ -223,14 +223,11 @@ def visualize():
         times = cursor.fetchall()
         cursor.close()
 
-        # timesArr = []
-        # for i in times:
-        #     row = json.dumps(times[i], default = str)
-        #     timesArr.append(row)
+      
+        timesStr = json.dumps(times, indent=4, sort_keys=True, default = str)
+        print(timesStr)
 
-        bloop = [1, 2, 3]
-
-        return render_template("visualize.html", times = bloop, project_name = project_name)
+        return render_template("visualize.html", times = timesStr, project_name = project_name)
 
 
 
