@@ -1,5 +1,11 @@
 {% extends "index.html" %}
 
+{% block head_js %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.1/chartjs-adapter-moment.min.js"></script>
+{% endblock %}  
+
 {% block title %}
     Productivity
 {% endblock %} 
@@ -7,20 +13,58 @@
 {% block main %}
     <div class = "container">
         <div class="header">{{ project_name }}</div>
-        <div>
-            {% for row in times %}
-                <div>{{ row }}</div>
-            {% endfor %}
-        </div>
-        <canvas id="myChart" width="400" height="400" id="Chart"></canvas>
-        <div>{{ times[0][0] }}</div>
+        <canvas id="myChart" width="400" height="400"></canvas>
     </div>
 {% endblock %}
 
 {% block javascript %}
-  <!-- <script type="module" src="static/Chart.js"></script> -->
-<script>
-  const dateTimes = JSON.parse("{{ times | tojson | safe }}");
-  console.log(dateTimes);
+<script> 
+(async function() {
+    const dateTimes = {{ times | tojson | safe }};
+    console.log(dateTimes[0].substr(16, 7));
+
+    let dataArr = [];
+    for(let i=0; i < dateTimes.length; i++){
+    const dataObj = {};
+    const date = moment().format(dateTimes[i].substr(2, 10));
+    const sec = parseInt(dateTimes[i].substr(21, 2));
+    const min = parseInt(dateTimes[i].substr(18, 2));
+    const hour = parseInt(dateTimes[i].substr(16, 1));
+    const minutes = hour*60 + min + sec/60;
+    dataObj["date"] = date;
+    dataObj["time"] = minutes;
+    dataArr.push(dataObj);
+    }
+    console.log(dataArr);
+
+    new Chart(
+    document.getElementById('myChart'), {
+        type: 'bar',
+        options: {
+            scales: {
+                x: {
+                    type: "time",
+                    time: {
+                        parser: 'YYYY/MM/DD',
+                        unit: "day",
+                        unitStepSize: 1,
+                        displayFormats: {
+                            "day": 'MM/DD/YY'
+                        }
+                    }
+                }
+            }
+        },
+        data: {
+            labels: dataArr.map(row => row.date),
+            datasets: [
+                {
+                label: 'Working Minutes per Day',
+                data: dataArr.map(row => row.time)
+                }
+            ]
+        }
+    });
+})();
 </script>
 {% endblock %}

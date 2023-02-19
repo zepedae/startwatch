@@ -8,3 +8,6 @@ CREATE TABLE times (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, user_id INT NOT 
 
 #watches:
 CREATE TABLE watches (id INT AUTO_INCREMENT PRIMARY KEY NOT NULL, user_id INT NOT NULL, username VARCHAR(25), watch_name VARCHAR(25), FOREIGN KEY (user_id) REFERENCES users(id));
+
+
+INSERT INTO times (user_id, watch_name, date, time_elapsed) VALUES ("1", "Survival Study", "2021-01-07", "01:53:11"), ("1", "Survival Study", "2021-01-08", "01:24:10"), ("1", "Survival Study", "2021-01-09","01:42:06"), ("1", "Survival Study", "2021-01-10", "01:24:01"), ("1", "Survival Study", "2021-01-13", "00:39:09"), ("1", "Survival Study", "2021-01-14", "01:39:04"), ("1", "Survival Study", "2021-01-15", "01:52:11"), ("1", "Survival Study", "2021-01-20", "01:27:58"), ("1", "Survival Study", "2021-01-21", "01:08:47"); 
