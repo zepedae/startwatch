@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block main %}
+    <div class = "container">
+        <div class="header">{{ project_name }}</div>
+        <input class="form-control mx-auto w-auto" name="new-name" id="new-name" placeholder="Enter new name" style="display: none">
+        <button class="btn btn-primary" name="change-name" id="change-name">Change watch name</button>
+        <form>
+
+            <button class="btn btn-primary" name="delete-watch">Delete watch</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    document.querySelector("#change-name").addEventListener("click", event => {
+
+        document.querySelector("#new-name").style.display = "block";
+    });
+</script>
+{% endblock %}

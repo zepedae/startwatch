@@ -210,7 +210,9 @@ def projects():
         elif "visualize" in request.form:
             session["project"] = request.form.get("visualize","")
             return redirect("/visualize")
-        #finish with edit
+        else: # "edit" in request.form:
+            session["project"] = request.form.get("edit","")
+            return redirect("/edit_watch")
 
 @app.route("/visualize", methods = ["GET", "POST"])
 @login_required
@@ -229,6 +231,13 @@ def visualize():
             timesArr.append(timesStr)
 
         return render_template("visualize.html", times = timesArr, project_name = project_name)
+
+@app.route("/edit_watch", methods = ["GET", "POST"])
+@login_required
+def edit_watch():
+    project_name = session["project"]
+    if request.method == "GET":
+        return render_template("edit_watch.html", project_name = project_name)
 
 if __name__ == "__main__": 
    app.run(debug=True)
