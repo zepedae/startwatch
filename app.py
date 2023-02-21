@@ -235,9 +235,16 @@ def visualize():
 @app.route("/edit_watch", methods = ["GET", "POST"])
 @login_required
 def edit_watch():
-    project_name = session["project"]
+    watch_name = session["project"]
     if request.method == "GET":
-        return render_template("edit_watch.html", project_name = project_name)
+        return render_template("edit_watch.html", project_name = watch_name)
+    if request.method == "POST":
+        if "delete-submit" in request.form:
+            cursor = conn.cursor(buffered=True)
+            cursor.execute("DELETE times, watches FROM times INNER JOIN watches ON watches.user_id = times.user_id WHERE watches.watch_name = %s", (watch_name, ))
+            cursor.close()
+            session.pop("project")
+            return redirect("/projects")
 
 if __name__ == "__main__": 
    app.run(debug=True)
