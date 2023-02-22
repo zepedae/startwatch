@@ -221,7 +221,7 @@ def visualize():
     user_id = session["id"]
     if request.method == "GET":
         cursor = conn.cursor(buffered=True)
-        cursor.execute("SELECT date, time_elapsed FROM times WHERE user_id = %s AND watch_name = %s", (user_id, project_name))
+        cursor.execute("SELECT date, time_elapsed FROM times WHERE user_id = %s AND watch_name = %s", (user_id, project_name, ))
         times = cursor.fetchall()
         cursor.close()
 
@@ -236,12 +236,18 @@ def visualize():
 @login_required
 def edit_watch():
     watch_name = session["project"]
+    user_id = session["id"]
     if request.method == "GET":
         return render_template("edit_watch.html", project_name = watch_name)
     if request.method == "POST":
         if "delete-submit" in request.form:
             cursor = conn.cursor(buffered=True)
-            cursor.execute("DELETE times, watches FROM times INNER JOIN watches ON watches.user_id = times.user_id WHERE watches.watch_name = %s", (watch_name, ))
+            cursor.execute("DELETE FROM watches WHERE watch_name = %s AND user_id = %s", (watch_name, user_id, ))
+            conn.commit()
+            cursor.close()
+            cursor = conn.cursor(buffered=True)
+            cursor.execute("DELETE FROM times WHERE watch_name = %s AND user_id = %s", (watch_name, user_id, ))
+            conn.commit()
             cursor.close()
             session.pop("project")
             return redirect("/projects")
