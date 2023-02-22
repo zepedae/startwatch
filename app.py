@@ -136,34 +136,34 @@ def logout():
 @app.route("/stopwatch", methods = ["GET", "POST"])
 @login_required
 def stopwatch():
+    watch_name = session["watch_name"]
     if request.method == "POST":
         data = request.get_json()
 
         time = data.get('time_elapsed')
-        project = data.get('project_name')
         user_id = session['id']
         today = date.today()
 
         cursor = conn.cursor(dictionary = True, buffered = True)
-        cursor.execute("SELECT date FROM times WHERE user_id=%s AND watch_name=%s ORDER BY id DESC LIMIT 1", (user_id, project, ))
+        cursor.execute("SELECT date FROM times WHERE user_id=%s AND watch_name=%s ORDER BY id DESC LIMIT 1", (user_id, watch_name, ))
         last_date = cursor.fetchone()
         cursor.close()
 
         if not last_date or last_date['date'] < today:
             cursor = conn.cursor(dictionary = True, buffered = True)
-            cursor.execute("INSERT INTO times (user_id, watch_name, time_elapsed) VALUES (%s, %s, %s)", (user_id, project, time, ) )
+            cursor.execute("INSERT INTO times (user_id, watch_name, time_elapsed) VALUES (%s, %s, %s)", (user_id, watch_name, time, ) )
             conn.commit()
             cursor.close()
         else:
             cursor = conn.cursor(dictionary=True, buffered=True)
-            cursor.execute("UPDATE times SET time_elapsed=%s WHERE user_id=%s AND date=%s AND watch_name=%s", (time, user_id, today, project, ))
+            cursor.execute("UPDATE times SET time_elapsed=%s WHERE user_id=%s AND date=%s AND watch_name=%s", (time, user_id, today, watch_name, ))
             conn.commit()
             cursor.close()
 
         return 'OK', 200
    
     else:
-        return render_template("stopwatch.html")
+        return render_template("stopwatch.html", watch_name = watch_name)
 
 
 @app.route("/create_watch", methods = ["GET", "POST"])
@@ -189,39 +189,39 @@ def create_watch():
         return render_template("create_watch.html")
 
 
-@app.route("/projects", methods = ["GET", "POST"])
+@app.route("/watches", methods = ["GET", "POST"])
 @login_required
-def projects():
+def watches():
     if request.method == "GET":
         user_id = session['id']
 
         cursor = conn.cursor(buffered=True)
         cursor.execute("SELECT watch_name FROM watches WHERE user_id = %s", (user_id, ))
-        names = cursor.fetchall()
+        watches = cursor.fetchall()
         cursor.close()
         
 
-        return render_template("projects.html", names = names)
+        return render_template("watches.html", watches = watches)
 
     else:
         if "stopwatch" in request.form:
-            session["project"] = request.form.get("stopwatch","")
-            return render_template("stopwatch.html", project_name = request.form['stopwatch'])
+            session["watch_name"] = request.form.get("stopwatch","")
+            return redirect("/stopwatch")
         elif "visualize" in request.form:
-            session["project"] = request.form.get("visualize","")
+            session["watch_name"] = request.form.get("visualize","")
             return redirect("/visualize")
         else: # "edit" in request.form:
-            session["project"] = request.form.get("edit","")
+            session["watch_name"] = request.form.get("edit","")
             return redirect("/edit_watch")
 
 @app.route("/visualize", methods = ["GET", "POST"])
 @login_required
 def visualize():
-    project_name = session["project"]
+    watch_name = session["watch_name"]
     user_id = session["id"]
     if request.method == "GET":
         cursor = conn.cursor(buffered=True)
-        cursor.execute("SELECT date, time_elapsed FROM times WHERE user_id = %s AND watch_name = %s", (user_id, project_name, ))
+        cursor.execute("SELECT date, time_elapsed FROM times WHERE user_id = %s AND watch_name = %s", (user_id, watch_name, ))
         times = cursor.fetchall()
         cursor.close()
 
@@ -230,27 +230,40 @@ def visualize():
             timesStr = json.dumps(i, default = str)
             timesArr.append(timesStr)
 
-        return render_template("visualize.html", times = timesArr, project_name = project_name)
+        return render_template("visualize.html", times = timesArr, watch_name = watch_name)
 
 @app.route("/edit_watch", methods = ["GET", "POST"])
 @login_required
 def edit_watch():
-    watch_name = session["project"]
+    watch_name = session["watch_name"]
     user_id = session["id"]
     if request.method == "GET":
-        return render_template("edit_watch.html", project_name = watch_name)
+        return render_template("edit_watch.html", watch_name = watch_name)
     if request.method == "POST":
+        print(request.form)
         if "delete-submit" in request.form:
-            cursor = conn.cursor(buffered=True)
+            cursor = conn.cursor()
             cursor.execute("DELETE FROM watches WHERE watch_name = %s AND user_id = %s", (watch_name, user_id, ))
             conn.commit()
             cursor.close()
-            cursor = conn.cursor(buffered=True)
+            cursor = conn.cursor()
             cursor.execute("DELETE FROM times WHERE watch_name = %s AND user_id = %s", (watch_name, user_id, ))
             conn.commit()
             cursor.close()
-            session.pop("project")
-            return redirect("/projects")
+            session.pop("watch_name")
+            return redirect("/watches")
+        if "change-name-submit" in request.form:
+            new_name = request.form.get("new-name")
+            cursor = conn.cursor()
+            cursor.execute("UPDATE watches SET watch_name = %s WHERE watch_name = %s AND user_id = %s", (new_name, watch_name, user_id, ))
+            conn.commit()
+            cursor.close()
+            cursor = conn.cursor()
+            cursor.execute("UPDATE times SET watch_name = %s WHERE watch_name = %s AND user_id = %s", (new_name, watch_name, user_id, ))
+            conn.commit()
+            cursor.close()
+            session["watch_name"] = new_name
+            return render_template("edit_watch.html", watch_name = new_name)
 
 if __name__ == "__main__": 
    app.run(debug=True)
