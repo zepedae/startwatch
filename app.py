@@ -175,14 +175,14 @@ def create_watch():
         else:
             username = session['username']
             user_id = session['id']
-            watch_name = request.form['watch_name']
+            new_watch = request.form['watch_name']
 
             cursor = conn.cursor()
-            cursor.execute("INSERT INTO watches (username, user_id, watch_name) VALUES (%s, %s, %s)", (username, user_id, watch_name, ) )
+            cursor.execute("INSERT INTO watches (username, user_id, watch_name) VALUES (%s, %s, %s)", (username, user_id, new_watch, ) )
             conn.commit()
             cursor.close()
 
-            added = "{} watch has been added!".format(watch_name)
+            added = "{} watch has been added!".format(new_watch)
 
             return render_template("create_watch.html", added=added)
     else:

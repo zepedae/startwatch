@@ -1,11 +1,11 @@
-body {
+/* body {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+} */
 
-.header {
+/* .header {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 4em;
-}
+} */
 .container{
     height: 300px;
     width: 100%;
@@ -49,24 +49,6 @@ nav .navbar-brand .yellow
 nav .navbar-brand .green
 {
     color: #2e944b;
-}
-
-/* Table stuff */
-
-.noborder{
-    border:none;
-
-    }
-
-.bin {
-    display: flex;
-    justify-content: center;
-}
-
-.watch-heads {
-    display: flex;
-    flex-direction: column;
-    padding: 2em;
 }
 
 #blackout {

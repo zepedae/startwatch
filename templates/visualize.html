@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block javascript %}
-<script> 
+<script>
 (async function() {
     const dateTimes = {{ times | tojson | safe }};
     console.log(dateTimes[0].substr(16, 7));
@@ -64,6 +64,5 @@
             ]
         }
     });
-})();
-</script>
+})();</script>
 {% endblock %}

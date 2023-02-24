@@ -3,7 +3,7 @@
 {% block main %}
     <div class = "container">
         <div id="blackout"></div>
-        <div class="header">{{ watch_name }}</div>
+        <div class="display-3">{{ watch_name }}</div>
         <button class="btn btn-primary" name="change-name" id="change-name">Change watch name</button>
         <form action="/edit_watch" method="post" id="name-form" style="display: none">
             <input class="form-control mx-auto w-auto" name="new-name" id="new-name" placeholder="Enter new name">
