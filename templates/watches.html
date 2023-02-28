@@ -4,16 +4,18 @@
 {% endblock %}
 
 {% block main %}
-    <div class="display-3">Watches</div>
-    <div class="row g-2"> 
+<main class="container-fluid py-5 px-5 text-center"> 
+    <div class="display-3 mb-5">Watches</div>
+    <div class="row mx-auto text-center"> 
             {% for row in watches %}
-            <div class = "col g-2"> {{ row[0] }}
-                <form class="form-group row g-2" action="/watches" method="post">
-                    <button class="btn btn-primary stopwatch row g-2" value="{{ row[0] }}" type="submit" name="stopwatch">Startwatch</button>
-                    <button class="btn btn-primary visualize row g-2" value="{{ row[0] }}" type="submit" name="visualize">Visualize</button>
-                    <button class="btn btn-primary edit row g-2" value="{{ row[0] }}" type="submit" name="edit">Edit</button>
+            <div class = "col col-sm lead text-center"> {{ row[0] }}
+                <form class="form-group row text-center  justify-contents-center" action="/watches" method="post">
+                    <button class="btn btn-primary stopwatch row" value="{{ row[0] }}" type="submit" name="stopwatch">Startwatch</button>
+                    <button class="btn btn-primary visualize row" value="{{ row[0] }}" type="submit" name="visualize">Visualize</button>
+                    <button class="btn btn-primary edit row" value="{{ row[0] }}" type="submit" name="edit">Edit</button>
                 </form>
             </div>
         {% endfor %}
     </div>
+</main>
 {% endblock %}

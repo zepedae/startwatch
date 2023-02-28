@@ -41,9 +41,8 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 @app.route("/")
-@login_required
-def index():
-    return render_template("index.html")
+def landing():
+    return render_template("landing.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -116,7 +115,7 @@ def login():
             session['loggedin'] = True
             session['id'] = user['id']
             session['username'] = user['username']
-            return redirect("/")
+            return redirect("watches.html")
             
 
     else:
