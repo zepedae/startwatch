@@ -1,18 +1,20 @@
 {% extends "index.html" %}
 
 {% block title %}
+Watches
 {% endblock %}
 
 {% block main %}
-<main class="container-fluid py-5 px-5 text-center"> 
+<main class="container-fluid p-5 text-center"> 
     <div class="display-3 mb-5">Watches</div>
-    <div class="row mx-auto text-center"> 
-            {% for row in watches %}
-            <div class = "col col-sm lead text-center"> {{ row[0] }}
-                <form class="form-group row text-center  justify-contents-center" action="/watches" method="post">
-                    <button class="btn btn-primary stopwatch row" value="{{ row[0] }}" type="submit" name="stopwatch">Startwatch</button>
-                    <button class="btn btn-primary visualize row" value="{{ row[0] }}" type="submit" name="visualize">Visualize</button>
-                    <button class="btn btn-primary edit row" value="{{ row[0] }}" type="submit" name="edit">Edit</button>
+    <div class="row"> 
+        {% for row in watches %}
+            <div class="col align-self-end">
+                <div class = "lead"> {{ row[0] }}</div>
+                <form class="row gy-3 m-0" action="/watches" method="post">
+                    <button class="btn btn-primary stopwatch row mx-0 my-2" value="{{ row[0] }}" type="submit" name="stopwatch">Startwatch</button>
+                    <button class="btn btn-primary visualize row mx-0 my-2" value="{{ row[0] }}" type="submit" name="visualize">Visualize</button>
+                    <button class="btn btn-primary edit row mx-0 my-2" value="{{ row[0] }}" type="submit" name="edit">Edit</button>
                 </form>
             </div>
         {% endfor %}

@@ -80,7 +80,7 @@ function startStop(){
 }
 
 function submit() {
-    const data = {"project_name": document.querySelector(".header").innerHTML,"time_elapsed": String(document.getElementById("display").innerText)};
+    const data = {"watch_name": document.querySelector(".header").innerHTML,"time_elapsed": String(document.getElementById("display").innerText)};
 
     fetch("/stopwatch", {
         method: "POST",

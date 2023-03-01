@@ -5,16 +5,54 @@ Welcome
 {% endblock %}
 
 {% block main %}
-<main class="container-fluid py-5 text-center">    
-    <div class="display-3 py-5">Welcome to Startwatch</div>
-    <p class="lead col-8 offset-2">
-        Startwatch is a time-management tools that addresses the shortcomings of to-do lists.
+<main>
+    <div class="container-fluid header landing-header py-5">
+        <div class="col px-4">
+            <div class="display-3 py-2 my-1 landing-header-2">Welcome to Startwatch</div>
+            <p class="display-6 ms-3 landing-header-3">
+                Startwatch is a time-management tools that uses effort-based productivity goals to give you a sense of accomplishment at the end of each day.
+            </p>
+            <button class="btn btn-primary ms-3">Register to Startwatch</button>
+        </div>
+    </div> 
+    <div class="container features">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <h3 class="feature-title">Lorem ipsum</h3>
+                <img src="images/column-1.jpg" class="img-fluid">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.</p>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <h3 class="feature-title">Lorem ipsum</h3>
+                <img src="images/column-2.jpg" class="img-fluid">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.</p>
+            </div>
+            
+            <div class="col-lg-4 col-md-4 col-sm-12">
+            
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row landing-description">
         Users can create a "watch" to record time spent working on a project. Working-time can then be visualized
         so users can evaluate their productivity across time.<br>
         Startwatch was born out of the feeling at the end of every day that I'd never done enough.<br>
         • Use in conjunction with a time goal and to do list every day<br>
         • On days you don't finish your to-do list you know you've made the effort<br>
-        • On days you finish your to-do list before your time goal, spend a that extra time working on things you avoid adding to your to-do list for whatever reason
-    </p>     
+        • On days you finish your to-do list before your time goal, spend a that extra time working on things you avoid adding to your to-do list for whatever reason</div>
+    </div>  -->
 </main>
+{% endblock %}
+
+{% block javascript %}
+<script>
+    var ready = (callback) => {
+        if (document.readyState != "loading") callback();
+        else document.addEventListener("DOMContentLoaded", callback);
+    }
+    ready(() => {
+        document.querySelector(".header").style.height = window.innerHeight + "px";
+    })
+</script>
 {% endblock %}

@@ -5,15 +5,18 @@
 {% endblock %} 
 
 {% block main %}
-    <div class = "container">
-        <div class="display-3">{{ project_name }}</div>
-        <div id = "display">
-            00:00:00
+    <div class = "container-fluid p-5 text-center overflow-hidden">
+        <div class="display-3 mb-3">{{ watch_name }}</div>
+        <div class="stopwatch">
+            <div class ="col" id = "display">
+                00:00:00
+            </div>
         </div>
-            <button class="btn btn-primary" id = "startStop">Start</button>
-            <button class="btn btn-primary" id = "reset">Reset</button>
+        <div class="text-center align-items-center g-5">
+            <button class="btn btn-primary bt-lg mx-2" id = "startStop">Start</button>
+            <button class="btn btn-primary mx-2" id = "reset">Reset</button>
+        </div>
     </div>
-    <p>{{ bloop }}</p>
 {% endblock %}
 
 {% block javascript %}
