@@ -34,7 +34,7 @@
 }
 
 .btn-primary{
-    background-color: rgba(210, 105, 30);
+    background-color: rgb(100, 78, 243);
 }
 
 .stopwatch {
@@ -52,51 +52,23 @@
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
-
     color: black;
 }
 
 .landing-header-3 {
     width: 60%;
+    font-size: font-size-base * 1.75 !important;
 }
 
-.landing-description {
-    background-color: rgba(0,0,0, 1);
-}
-
-.overlay{
-    position: absolute;
+.vertical-center {
     min-height: 100%;
-    min-width: 100%;
-    left: 0;
-    top: 0;
-    background: rgba(244, 244, 244, .45);
-   }
+    min-height: 100vh; 
+    display: flex;
+    align-items: center;
+  }
 
-
-
-/* Size for brand */
-nav .navbar-brand
-{
-    font-size: xx-large;
-}
-
-/* Colors for brand */
-nav .navbar-brand .blue
-{
-    color: #537fbe;
-}
-nav .navbar-brand .red
-{
-    color: #ea433b;
-}
-nav .navbar-brand .yellow
-{
-    color: #f5b82e;
-}
-nav .navbar-brand .green
-{
-    color: #2e944b;
+.features {
+    background-color: #fff3f3;
 }
 
 #blackout {
@@ -167,3 +139,12 @@ nav .navbar-brand .green
     from {opacity: 0;}
     to {opacity:1 ;}
   } 
+
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 48;
+    font-size: 80px !important;
+  }
