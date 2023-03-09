@@ -115,7 +115,7 @@ def login():
             session['loggedin'] = True
             session['id'] = user['id']
             session['username'] = user['username']
-            return redirect("watches.html")
+            return redirect("/watches")
             
 
     else:

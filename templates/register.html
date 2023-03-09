@@ -5,7 +5,10 @@
 {% endblock %}
 
 {% block main %}
-    <div class="display-2">Startwatch</div>
+<div class="row header-back mt-5 text-center">
+    <div class="display-5">Register for Startwatch</div>
+</div>
+<div class="row m-4 text-center">
     <form action="/register" method="post">
         <div class="mb-3">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text">
@@ -16,6 +19,7 @@
         <div class="mb-3">
             <input class="form-control mx-auto w-auto" id="confirmation" name="confirmation" placeholder="Confirm password" type="password">
         </div>
-        <button class="btn btn-primary" type="submit">Register</button>
+        <button class="btn btn-std btn-primary" type="submit">Register</button>
     </form>
+</div>
 {% endblock %}
