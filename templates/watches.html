@@ -5,15 +5,34 @@ Watches
 {% endblock %}
 
 {% block main %}
-<div class="display-3 mb-5">Watches</div>
-<div class="row"> 
+<div class="row my-5 text-center">
+    <div class="display-5">Watches</div>
+</div>
+<div class="watch-cont text-center"> 
     {% for row in watches %}
-        <div class="col align-self-end">
-            <div class = "lead"> {{ row[0] }}</div>
-            <form class="row gy-3 m-0" action="/watches" method="post">
-                <button class="btn btn-primary stopwatch row mx-0 my-2" value="{{ row[0] }}" type="submit" name="stopwatch">Startwatch</button>
-                <button class="btn btn-primary visualize row mx-0 my-2" value="{{ row[0] }}" type="submit" name="visualize">Visualize</button>
-                <button class="btn btn-primary edit row mx-0 my-2" value="{{ row[0] }}" type="submit" name="edit">Edit</button>
+        <div class="watch-card">
+            <div class="watch-text">
+                <div class = "watch-display-text"> {{ row[0] }}</div>
+            </div>
+            <form class="" action="/watches" method="post">
+                <button class="btn btn-watch btn-primary stopwatch mx-0 my-2" value="{{ row[0] }}" type="submit" name="stopwatch">
+                    <div class="material-symbols-outlined icon-watch">
+                        pace
+                    </div>
+                    Startwatch
+                </button>
+                <button class="btn btn-watch btn-primary visualize mx-0 my-2" value="{{ row[0] }}" type="submit" name="visualize">
+                    <div class="material-symbols-outlined icon-watch">
+                        monitoring
+                    </div>
+                    Visualize
+                </button>
+                <button class="btn btn-watch btn-primary edit mx-0 my-2" value="{{ row[0] }}" type="submit" name="edit">
+                    <div class="material-symbols-outlined icon-watch">
+                        edit
+                    </div>
+                    Edit
+                </button>
             </form>
         </div>
     {% endfor %}
