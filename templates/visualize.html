@@ -11,16 +11,14 @@
 
 {% block main %}
     <div class="row my-5 text-center">
-        <div class="display-5">{{ watch_name }}: Productivity</div>
+        <div class="display-5">{{ watch_name }}</div>
     </div>
     <form class="row text-center vis-form">
         <div class="row">
             <label for = "displayDate" class="col">Choose display dates
-                <div class="row text-center"><label>Start date<input type="date" id = "startDate" name = "displayDate" onchange="createChart()" min = "" max = ""></label></div>
+                <div class="row text-center"><label>Start date<input type="date" id = "startDate" name = "displayDate" onchange="createNewChart()" min = "" max = ""></label></div>
                 <div class="row"><label>End date<input type="date" id = "endDate" name = "displayDate" onchange="createChart()" min = "" max = ""></label></div>
             </label>
-        </div>
-        <div class="row">
             <label for="units" class="col"> Choose display units
                 <div class="row">
                     <label>
@@ -46,7 +44,7 @@
 
 {% block javascript %}
 <script>
-(async function() {
+(async function createChart() {
 
     const dateTimes = {{ times | tojson | safe }};
 
@@ -108,6 +106,10 @@
         }
     });
 
+    // function createNewChart() {
+    //     const newStart = getElementById(startDate);
+
+    // }
     // var maxDate=new Date(Math.max.apply(null,dataArr));
     // var minDate=new Date(Math.min.apply(null,dataArr));
 })();</script>

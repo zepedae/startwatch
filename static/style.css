@@ -130,11 +130,11 @@
 /* Stopwatch */
 .stopwatch-cont {
   border: 4px solid rgb(0, 0, 0);
-  width: 40%;
+  width: auto;
 }
 
 #stopwatch-display {
-  font-size: 7vw;
+  font-size: clamp(3rem, 10vw, 80px);
 }
 
 #blackout {
