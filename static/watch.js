@@ -61,7 +61,7 @@ function stopWatch(){
 
 
     //Display updated time values to user
-    document.getElementById("display").innerHTML= displayHours + ":" + displayMinutes + ":" + displaySeconds;
+    document.getElementById("stopwatch-display").innerHTML= displayHours + ":" + displayMinutes + ":" + displaySeconds;
 }
 
 function startStop(){
@@ -80,7 +80,7 @@ function startStop(){
 }
 
 function submit() {
-    const data = {"watch_name": document.querySelector(".header").innerHTML,"time_elapsed": String(document.getElementById("display").innerText)};
+    const data = {"watch_name": document.querySelector(".header").innerHTML,"time_elapsed": String(document.getElementById("stopwatch-display").innerText)};
 
     fetch("/stopwatch", {
         method: "POST",
@@ -108,7 +108,7 @@ function reset(){
     seconds = 0;
     minutes = 0;
     hours = 0;
-    document.getElementById("display").innerHTML = "00:00:00";
+    document.getElementById("stopwatch-display").innerHTML = "00:00:00";
     document.getElementById("startStop").innerHTML = "Start";
 }
 

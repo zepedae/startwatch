@@ -119,8 +119,26 @@
   padding: 0 2vw;
 }
 
+
+
+/* Visualize */
+.vis-form {
+}
+
+
+
+/* Stopwatch */
+.stopwatch-cont {
+  border: 4px solid rgb(0, 0, 0);
+  width: 40%;
+}
+
+#stopwatch-display {
+  font-size: 7vw;
+}
+
 #blackout {
-  width:100%;
+  width: 100%;
   height:100%; /* make sure you have set parents to a height of 100% too*/
   position: absolute;
   left:0; top:0;
