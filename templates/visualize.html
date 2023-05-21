@@ -13,10 +13,9 @@
     <div class="row my-5 text-center">
         <div class="display-5">{{ watch_name }}</div>
     </div>
-    <div class="row text-center">
-        <div class="col my-3 text-center chart-cont" style="position: relative; height:60vh; width:80vw">
-            <canvas class = "mx-5" id="prod-chart" width="70vw"></canvas>
-        </div>
+    <div class="row chart-cont my-3 justify-content-center">
+        <canvas class = "col mx-5" id="prod-chart" width="70vw"></canvas>
+    </div>
     </div>
 {% endblock %}
 
@@ -42,15 +41,21 @@
     }
 
     // Create entry for current date to display productivity from start to present day
-    const today = moment().format('YYYY/MM/DD');
-    if(!Object.values(dataArr).includes(today)){
-        let newObj = {
-            "date": today,
-            "time": 0
-            };
-        console.log(newObj);
-        dataArr.push(newObj);
-        console.log(dataArr);
+    const today = moment().format("YYYY/MM/DD");
+    console.log(`"${today}"`);
+    for(let i = 0; i < dataArr.length; i++){
+        console.log(Object.values(dataArr[i]).includes(`"${today}"`));
+        console.log(i);
+        if(Object.values(dataArr[i]).includes(`"${today}"`)){ 
+            break; 
+        } else {
+            if(i = dataArr.length-1){
+                let newObj = {
+                    "date": today,
+                    "time": 0
+                    };
+                };
+        }
     }
 
     // Create chart
@@ -70,11 +75,6 @@
                         }
                     }
                 },
-                yAxes: [{
-                    ticks: {
-                        maxTicksLimit: 5
-                    }
-                }]
             }
         },
         data: {
