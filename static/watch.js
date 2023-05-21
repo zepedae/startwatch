@@ -64,13 +64,15 @@ function stopWatch(){
     document.getElementById("stopwatch-display").innerHTML= displayHours + ":" + displayMinutes + ":" + displaySeconds;
 }
 
+
 function startStop(){
+    // Start stopwatch 
     if(state === "stopped"){
-        //Start stopwatch 
         interval = window.setInterval(stopWatch, 1000);
         document.getElementById("startStop").innerHTML = "Stop";
         state = "started";
     }
+    // Stop stopwatch and initiate data transfer
     else{
         document.getElementById("startStop").innerHTML = "Start";
         submit();
@@ -79,9 +81,12 @@ function startStop(){
     }
 }
 
+// Send data to app.py
 function submit() {
+    // Create time object
     const data = {"watch_name": document.querySelector(".header").innerHTML,"time_elapsed": String(document.getElementById("stopwatch-display").innerText)};
 
+    // Use Fetch API to send data
     fetch("/stopwatch", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -103,6 +108,7 @@ function submit() {
     });
 }
 
+// Reset stopwatch
 function reset(){
     window.clearInterval(interval);
     seconds = 0;
