@@ -13,28 +13,6 @@
     <div class="row my-5 text-center">
         <div class="display-5">{{ watch_name }}</div>
     </div>
-    <form class="row text-center vis-form">
-        <div class="row">
-            <label for = "displayDate" class="col">Choose display dates
-                <div class="row text-center"><label>Start date<input type="date" id = "startDate" name = "displayDate" onchange="createNewChart()" min = "" max = ""></label></div>
-                <div class="row"><label>End date<input type="date" id = "endDate" name = "displayDate" onchange="createChart()" min = "" max = ""></label></div>
-            </label>
-            <label for="units" class="col"> Choose display units
-                <div class="row">
-                    <label>
-                        <input type="radio"id = "hours" name = "units" value="hours">
-                        Hours
-                    </label>
-                </div>
-                <div class="row">
-                    <label>
-                        <input type="radio" id = "mins" name = "units" value="mins">
-                        Minutes
-                    </label>
-                </div>
-            </label>
-        </div>
-    </form>
     <div class="row text-center">
         <div class="col my-3 text-center chart-cont" style="position: relative; height:60vh; width:80vw">
             <canvas class = "mx-5" id="prod-chart" width="70vw"></canvas>
@@ -105,12 +83,5 @@
             ]
         }
     });
-
-    // function createNewChart() {
-    //     const newStart = getElementById(startDate);
-
-    // }
-    // var maxDate=new Date(Math.max.apply(null,dataArr));
-    // var minDate=new Date(Math.min.apply(null,dataArr));
 })();</script>
 {% endblock %}
