@@ -13,9 +13,14 @@ Welcome
             Startwatch is a time-management tool that uses effort-based productivity goals to give you a sense of accomplishment at the end of each day.
         </p>
         {% if session["loggedin"] %}
-        <form action="/watches" method="get">
-            <button class="btn btn-primary lead btn-land" id="watches">Go to watches</button>
-        </form>
+        <div class="btns-1">
+            <form action="/watches" method="get">
+                <button class="btn btn-primary lead btn-land" id="watches">Go to watches</button>
+            </form>
+            <form action="/create_watch" method="get">
+                <button class="btn btn-primary lead btn-land mx-3" id="new_watch">Create new watch</button>
+            </form>
+        </div>
         {% else %}
         <form action="/register" method="get">
             <button class="btn btn-primary lead btn-land" id="register">Register to Start</button>
@@ -25,7 +30,34 @@ Welcome
 
     <div class="row features p-5">
         <div class="feature-flex">
-            <div class="descript-flex mb-5">
+            <div class="row text-center">
+                <div class="card-flex py-5">
+                    <div class="features-card col-lg-4 col-md-4 col-sm-12">
+                        <h3 class="feature-title display-5">Set</h3>
+                        <div class="material-symbols-outlined icon-land">
+                            list_alt
+                        </div>
+                        <p>Set time-based productivity goals in the form of working time targets.</p>
+                    </div>
+                
+                    <div class="features-card col-lg-4 col-md-4 col-sm-12">
+                        <h3 class="feature-title display-5">Track</h3>
+                        <div class="material-symbols-outlined icon-land">
+                            pace
+                        </div>
+                        <p>Record working time to keep track of goals across various projects.</p>
+                    </div>
+                
+                    <div class="features-card px-3 col-lg-4 col-md-4 col-sm-12">
+                        <h3 class="feature-title display-5">Reflect</h3>
+                        <div class="material-symbols-outlined icon-land">
+                            monitoring
+                        </div>
+                        <p>Visualize effort across time to reflect on goals, effort, and efficiency.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="descript-flex my-5">
                 <div class="display-5 text-center mb-3">An effort-based time-management tool</div>
                 <div class="landing-description">
                     <div class="description-lead mb-3">
@@ -58,39 +90,14 @@ Welcome
                     </div>
                 </div>
             </div>
-            <div class="card-flex">
-                <div class="features-card col-lg-4 col-md-4 col-sm-12">
-                    <h3 class="feature-title display-5">Set</h3>
-                    <div class="material-symbols-outlined icon-land">
-                        list_alt
-                    </div>
-                    <p>Set time-based productivity goals in the form of working time targets.</p>
-                </div>
-            
-                <div class="features-card col-lg-4 col-md-4 col-sm-12">
-                    <h3 class="feature-title display-5">Track</h3>
-                    <div class="material-symbols-outlined icon-land">
-                        pace
-                    </div>
-                    <p>Record working time to keep track of goals across various projects.</p>
-                </div>
-            
-                <div class="features-card px-3 col-lg-4 col-md-4 col-sm-12">
-                    <h3 class="feature-title display-5">Reflect</h3>
-                    <div class="material-symbols-outlined icon-land">
-                        monitoring
-                    </div>
-                    <p>Visualize effort across time to reflect on goals, effort, and efficiency.</p>
-                </div>
-            </div>
         </div>
     </div>
 
 {% endblock %}
 
 {% block javascript %}
-//set landing header height to screen height
 <script>
+    //set landing header height to screen height
     var ready = (callback) => {
         if (document.readyState != "loading") callback();
         else document.addEventListener("DOMContentLoaded", callback);

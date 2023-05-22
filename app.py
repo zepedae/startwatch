@@ -81,6 +81,15 @@ def register():
             conn.commit()
         
         cursor.close()
+
+        # log user in 
+        cursor = conn.cursor()
+        cursor.execute("SELECT * FROM users WHERE username = %s", (username,) )
+        new_user = cursor.fetchone()
+
+        session['loggedin'] = True
+        session['id'] = new_user[0]
+        session['username'] = new_user[1]
         
         return redirect("/")
 

@@ -36,6 +36,12 @@
   font-weight: 300;
 }
 
+.btns-1 {
+  display: flex;
+}
+
+
+
 .vertical-center {
   min-height: 100%;
   min-height: 100%; 
@@ -71,6 +77,7 @@
 
 .card-flex {
   display: flex;
+  background-color: rgb(244, 244, 244);;
 }
 
 .features-card {
@@ -153,9 +160,6 @@
 
 
 /* Visualize */
-.vis-form {
-}
-
 
 
 /* Stopwatch */
@@ -216,70 +220,6 @@
 .btn-primary{
   background-color: rgb(100, 78, 243);
 }
-
-/* visualize */
-
-/* .stopwatch {
-  width: 50%;
-  border: 1px solid black;
-  margin: 1rem;
-
-  display: flex;
-  align-items: center;
-} */
-
-/* Popup container */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
-}
-
-/* The actual popup (appears on top) */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 50%;
-  left: 50%;
-  margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-} 
 
 .material-symbols-outlined {
   font-variation-settings:
