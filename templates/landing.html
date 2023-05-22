@@ -23,43 +23,65 @@ Welcome
         {% endif %}
     </div>
 
-    <div class="row features text-center p-5">
-        <div>
-            <div class="col">
-                <div class="display-4 mb-3">Effort matters</div>
+    <div class="row features p-5">
+        <div class="feature-flex">
+            <div class="descript-flex mb-5">
+                <div class="display-5 text-center mb-3">An effort-based time-management tool</div>
                 <div class="landing-description">
-                    Users can create a "watch" to record time spent working on a project. Working-time can then be visualized
-                    so users can evaluate their productivity across time.<br>
-                    Startwatch was born out of the feeling at the end of every day that I'd never done enough.<br>
-                    • Use in conjunction with a time goal and to do list every day<br>
-                    • On days you don't finish your to-do list you know you've made the effort<br>
-                    • On days you finish your to-do list before your time goal, spend a that extra time working on things you avoid adding to your to-do list for whatever reason
+                    <div class="description-lead mb-3">
+                        Checking off to-do list items is important, but work that involves a lot of 
+                        troubleshooting, creativity, or other forms of uncertainty, unforseen 
+                        circumstances can make this difficult. Despite your considerable effort, these
+                        unchecked lists can create a sense of failure that can reduce motivation 
+                        or increasing overworking - causing you to miss out on the power of 
+                        "stepping away" for creative problem solving.<br><br>
+
+                        Startwatch solves this problem by using effort-based goals to help you
+                        manage your productivity across different projects. After setting a
+                        time-based productivity goal for a project (e.g., 2 hours/day), users can 
+                        create a "watch" to record productivity for different projects each day. 
+                        Productivity time can then be visualized so users can evaluate their productivity 
+                        across time.<br><br>
+
+                        Achieving productivity goals using this effort-based strategy leaves you with 
+                        a feeling of accomplishment even on the days when your to-do list doesn't change
+                        much. On days when your tasks are completed before your time goal 
+                        is up, the strategy has the added bonus of encouraging you to work on those less
+                        time-sensitive, easy to avoid tasks.
+                    </div>
+                    <div class="description-list">
+                        • Use in conjunction with a time-based productivity goal and to-do list every day<br>
+                        • On days you don't finish your to-do list you know you've made the effort<br>
+                        • On days you finish your to-do list before your time goal, spend the extra
+                        time working on things you avoid adding to or push to the bottom of your 
+                        to-do list
+                    </div>
                 </div>
             </div>
-        </div>
-        <div>
-            <div class="features-card col-lg-4 col-md-4 col-sm-12">
-                <h3 class="feature-title display-5">Set</h3>
-                <div class="material-symbols-outlined icon-land">
-                    list_alt
+            <div class="card-flex">
+                <div class="features-card col-lg-4 col-md-4 col-sm-12">
+                    <h3 class="feature-title display-5">Set</h3>
+                    <div class="material-symbols-outlined icon-land">
+                        list_alt
+                    </div>
+                    <p>Set time-based productivity goals in the form of working time targets.</p>
                 </div>
-                <p>Set effort-based productivity goals in the form of working time targets.</p>
-            </div>
             
-            <div class="features-card col-lg-4 col-md-4 col-sm-12">
-                <h3 class="feature-title display-5">Track</h3>
-                <div class="material-symbols-outlined icon-land">
-                    pace
+                <div class="features-card col-lg-4 col-md-4 col-sm-12">
+                    <h3 class="feature-title display-5">Track</h3>
+                    <div class="material-symbols-outlined icon-land">
+                        pace
+                    </div>
+                    <p>Record working time to keep track of goals across various projects.</p>
                 </div>
-                <p>Record working time to keep track of goals across various projects.</p>
-            </div>
             
-            <div class="features-card px-3 col-lg-4 col-md-4 col-sm-12">
-                <h3 class="feature-title display-5">Reflect</h3>
-                <div class="material-symbols-outlined icon-land">
-                    monitoring
+                <div class="features-card px-3 col-lg-4 col-md-4 col-sm-12">
+                    <h3 class="feature-title display-5">Reflect</h3>
+                    <div class="material-symbols-outlined icon-land">
+                        monitoring
+                    </div>
+                    <p>Visualize effort across time to reflect on goals, effort, and efficiency.</p>
                 </div>
-                <p>Visualize effort across time to reflect on goals, effort, and efficiency.</p>
             </div>
         </div>
     </div>
@@ -67,6 +89,7 @@ Welcome
 {% endblock %}
 
 {% block javascript %}
+//set landing header height to screen height
 <script>
     var ready = (callback) => {
         if (document.readyState != "loading") callback();

@@ -4,6 +4,10 @@
 }
 
 
+/* Index */
+.container-main {
+  margin-top: 4rem;
+}
 
 /* Landing page */
 .header {
@@ -42,11 +46,38 @@
 .features {
   background-color: rgb(234, 234, 234);
   vertical-align: top;
-  height: 100vh;
+  height: auto;
+}
+
+.feature-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.descript-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-description {
+  width: 80vw;
+  font-size: 1rem;
+}
+
+.description-lead {
+  text-align: jusitfy !important;
+}
+
+.card-flex {
+  display: flex;
 }
 
 .features-card {
   max-width: 25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .icon-land {
