@@ -22,14 +22,6 @@
   overflow: visible;
 }
 
-/* .header-back{
-  width: 100vw !important;
-  background-color: rgba(233, 240, 135, 1);
-  margin-left: calc((-100vw + 100%) / 2);
-  margin-right: calc((-100vw + 100%) * 2);
-
-} */
-
 .landing-header-3 {
   width: 60%;
   font-size: font-size-base * 1.75 !important;
@@ -48,12 +40,21 @@
 }
 
 .features {
-  background-color: rgb(255, 243, 243);
-  height: 400px;
+  background-color: rgb(234, 234, 234);
+  vertical-align: top;
+  height: 100vh;
+}
+
+.features-card {
+  max-width: 25rem;
 }
 
 .icon-land {
   font-size: 80px !important;
+}
+
+.landing-description {
+  width: 
 }
 
 
@@ -81,9 +82,8 @@
 }
 
 .watch-card {
-  flex: 1;
   margin: 2vw;
-  width: max(5vw, 500px);
+  width: max(5vw, 400px);
   height: 200px;
 
   border: 2px solid rgba(200,200,200,1);

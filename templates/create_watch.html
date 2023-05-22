@@ -5,13 +5,16 @@
 {% endblock %}
 
 {% block main %}
-    <div class="display-3">Create a new watch</div>
-    <form action="/create_watch" method="post">
-        <div class="mb-3">
+    <div class="row mt-5 mb-3 text-center">
+        <div class = "col display-5">Create a new watch</div>
+    </div>
+
+    <div class="row text-center">
+        <form class="col gy-3" action="/create_watch" method="post">
             <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="watch_name" name="watch_name" placeholder="Watch name" type = "text">
-        </div>
-        <button class="btn btn-primary" type="submit" id="new-watch-submit">Add watch</button>
-    </form>
+            <button class="btn btn-primary m-3" type="submit" id="new-watch-submit">Add watch</button>
+        </form>
+    </div>
 {% endblock %}
 
 {% block javascript %}
