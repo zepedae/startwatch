@@ -1,22 +1,30 @@
 {% extends "index.html" %}
 
 {% block main %}
-    <div class = "container">
+    <div class="row text-center">
         <div id="blackout"></div>
-        <div class="display-3">{{ watch_name }}</div>
-        <button class="btn btn-primary" name="change-name" id="change-name">Change watch name</button>
-        <form action="/edit_watch" method="post" id="name-form" style="display: none">
-            <input class="form-control mx-auto w-auto" name="new-name" id="new-name" placeholder="Enter new name">
-            <button class="btn btn-primary" type="submit" name="change-name-submit" id="change-name-submit">Change name</button>
-        </form>
-        <button class="btn btn-primary" name="delete-watch" id="delete-watch">Delete watch</button>
-        <div class="popup">
-            <form action="/edit_watch" method="post" class="popuptext" id="myPopup">
-                <label for="delete-submit">Are you sure you want to delete this watch including its productivity data?</label>
-                <button class="btn btn-primary" style="background-color: chocolate" id="delete-submit" name="delete-submit">Delete watch</button>
-            </form>
+
+        <div class="row mt-5 mb-3 text-center">
+            <div class = "col display-5">Edit: {{ watch_name }}</div>
         </div>
 
+        <div class="edit-content">
+            <button class="btn btn-primary btn-edit my-2" name="change-name" id="change-name">Change watch name</button>
+            <form action="/edit_watch" method="post" id="name-form" style="display: none">
+                <input class="form-control mx-auto w-auto mb-2" name="new-name" id="new-name" placeholder="Enter new name">
+                <button class="btn btn-primary" type="submit" name="change-name-submit" id="change-name-submit">Change name</button>
+                <button class="btn btn-primary" type="reset" name="cancel-name-submit" id="cancel-name-submit">Cancel</button>
+            </form>
+            <button class="btn btn-primary btn-edit my-2" name="delete-watch" id="delete-watch">Delete watch</button>
+            <div class="popup">
+                <form action="/edit_watch" method="post" class="popuptext" id="myPopup">
+                    <label for="delete-submit">Are you sure you want to delete this watch including its productivity data?</label>
+                    <button class="btn btn-primary" type="submit" style="background-color: chocolate" id="delete-submit" name="delete-submit">Delete watch</button>
+                    <button class="btn btn-primary" type="reset" style="background-color: rgb(202, 202, 201)" id="cancel-submit" name="cancel-submit">Cancel</button>
+                </form>
+            </div>
+
+        </div>
     </div>
 {% endblock %}
 
@@ -33,17 +41,23 @@
         document.querySelector("#name-form").style.display = "block";
     });
 
-    document.querySelector("#delete-watch").addEventListener("click", event => {
-        document.querySelector("#delete-watch").style.display = "none";
-        document.querySelector("#change-name").style.display = "none";
-
-        // document.querySelector("#blackout").style.display = "block";
-        // const deleteForm = document.querySelector("#delete-form");
-        // deleteForm.style = "display: fixed";
-
-        myFunction();
-        
-
+    document.querySelector("#cancel-name-submit").addEventListener("click", event => {
+        document.querySelector("#change-name").style.display = "block";
+        document.querySelector("#delete-watch").style.display = "block";
+        document.querySelector("#name-form").style.display = "none";
     });
+
+    document.querySelector("#delete-watch").addEventListener("click", event => {
+        myFunction();
+    });
+
+    document.querySelector("#cancel-submit").addEventListener("click", event => {
+        document.querySelector("#delete-watch").style.display = "block";
+        document.querySelector("#change-name").style.display = "block";
+
+        document.getElementById("myPopup").classList.toggle("show");
+    });
+
+     
 </script>
 {% endblock %}

@@ -12,9 +12,15 @@ Welcome
     <p class="landing-header-3 lead">
         Startwatch is a time-management tool that uses effort-based productivity goals to give you a sense of accomplishment at the end of each day.
     </p>
+    {% if session["loggedin"] %}
+    <form action="/watches" method="get">
+        <button class="btn btn-primary lead btn-land" id="watches">Go to watches</button>
+    </form>
+    {% else %}
     <form action="/register" method="get">
         <button class="btn btn-primary lead btn-land" id="register">Register to Start</button>
     </form>
+    {% endif %}
 </div>
 <div class="row features text-center vertical-center p-5">
     <div class="col-lg-4 col-md-4 col-sm-12">

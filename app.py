@@ -282,6 +282,8 @@ def edit_watch():
             cursor.close()
             session.pop("watch_name")
             return redirect("/watches")
+        if "cancel-submit" in request.form:
+            return render_template("edit_watch.html", watch_name = new_name)
         # change project name
         if "change-name-submit" in request.form:
             new_name = request.form.get("new-name")
