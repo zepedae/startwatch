@@ -6,7 +6,7 @@ Watches
 
 {% block main %}
 <div class="row my-5 text-center">
-    <div class="display-3">Watches</div>
+    <div class="page-title display-5">Watches</div>
 </div>
 
 <div class="watch-cont text-center"> 
@@ -37,5 +37,14 @@ Watches
             </form>
         </div>
     {% endfor %}
+    <div class="watch-card py-3">
+        <form class="watch-form create-watch-form" action="/create_watch" method="get">
+            <button class="btn btn-watch btn-primary create-watch-btn stopwatch mx-0 my-2" type="submit" value="create_watch" name="create_watch">
+                <div class="material-symbols-outlined icon-watch">
+                    add_circle
+                </div>
+                Create a new watch
+            </button>
+        </form>
 </div>
 {% endblock %}

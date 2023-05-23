@@ -1,12 +1,10 @@
-.container-fluid{
+.container-fluid {
   margin-left: auto;
   margin-right: auto;
 }
 
-
-/* Index */
-.container-main {
-  margin-top: 4rem;
+.page-title {
+  margin-top: 6rem;
 }
 
 /* Landing page */
@@ -78,35 +76,34 @@
 
 .descript-lead-1, 
 .descript-lead-3 {
- background-color: rgb(230, 233, 135);
- padding: 1rem;
- margin-left: -65px !important; 
- margin-bottom: 2rem;
+  background-color: rgb(241, 231, 114);
+  padding: 1rem;
+  margin-right: 15vw !important;
+  margin-left: -65px !important; 
+  margin-bottom: 3rem !important;
 }
 
 .descript-lead-1 > *, 
 .descript-lead-3 > * {
-  width: 90%;
+  width: 80%;
   margin-left: auto; 
-  margin-right: 0;
+  margin-right: 3rem;
+  text-align: justify;
 }
 
-.descript-lead-2,
-.description-list {
-  background-color: rgb(230, 233, 135);
+.descript-lead-2 {
+  background-color: rgb(241, 231, 114);
   padding: 1rem;
-  margin-right: -56px !important; 
-  margin-bottom: 2rem;
+  margin-left: 15vw !important;
+  margin-right: -65px !important; 
+  margin-bottom: 3rem !important;
 }
 
-.descript-lead-2 > *,
-.description-list > * {
- width: 90%;
- margin-left: 0; 
-}
-
-.description-list {
-  font-size: 1.5rem;
+.descript-lead-2 > * {
+  width: 80%;
+  margin-right: auto; 
+  margin-left: 3rem;
+  text-align: justify;
 }
 
 .card-flex {
@@ -191,7 +188,14 @@
   padding: 0 2vw;
 }
 
-
+.create-watch-form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.create-watch-btn {
+  height: 30%;
+}
 
 /* Visualize */
 
