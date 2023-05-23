@@ -50,7 +50,7 @@
 }
 
 .features {
-  background-color: rgb(234, 234, 234);
+  background-color: rgb(255, 252, 252);
   vertical-align: top;
   height: auto;
 }
@@ -58,26 +58,59 @@
 .feature-flex {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .descript-flex {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* width: 90%; */
 }
 
 .landing-description {
-  width: 80vw;
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .description-lead {
   text-align: jusitfy !important;
 }
 
+.descript-lead-1, 
+.descript-lead-3 {
+ background-color: rgb(230, 233, 135);
+ padding: 1rem;
+ margin-left: -65px !important; 
+ margin-bottom: 2rem;
+}
+
+.descript-lead-1 > *, 
+.descript-lead-3 > * {
+  width: 90%;
+  margin-left: auto; 
+  margin-right: 0;
+}
+
+.descript-lead-2,
+.description-list {
+  background-color: rgb(230, 233, 135);
+  padding: 1rem;
+  margin-right: -56px !important; 
+  margin-bottom: 2rem;
+}
+
+.descript-lead-2 > *,
+.description-list > * {
+ width: 90%;
+ margin-left: 0; 
+}
+
+.description-list {
+  font-size: 1.5rem;
+}
+
 .card-flex {
   display: flex;
-  background-color: rgb(244, 244, 244);;
 }
 
 .features-card {
@@ -85,6 +118,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .icon-land {

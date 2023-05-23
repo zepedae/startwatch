@@ -209,9 +209,7 @@ def create_watch():
             conn.commit()
             cursor.close()
 
-            added = "{} watch has been added!".format(new_watch)
-
-            return render_template("create_watch.html", added=added)
+            return render_template("watches.html")
     else:
         return render_template("create_watch.html")
 
