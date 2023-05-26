@@ -6,11 +6,11 @@
 
 {% block main %}
     <div class="row mt-4 mb-2 text-center">
-        <div class="page-title display-5">
+        <div class="page-title header display-5">
         {{ watch_name }}</div>
     </div>
     <div class="row justify-content-center">
-        <div class="stopwatch-cont my-3">
+        <div class="stopwatch-cont mt-3 mb-1">
             <div class="row text-center">
                 <div class ="col" id = "stopwatch-display">
                     00:00:00
@@ -18,8 +18,8 @@
             </div>
         </div>
         <div class="row justify-content-center g-3 m-0 mb-">
-            <button class="btn btn-primary col-2 m-2" id = "startStop">Start</button>
-            <button class="btn btn-primary col-2 m-2" id = "reset">Reset</button>
+            <button class="btn btn-primary btn-stopwatch m-3" id = "startStop">Start</button>
+            <button class="btn btn-primary btn-stopwatch m-3" id = "reset">Reset</button>
         </div>
     </div>
 {% endblock %}

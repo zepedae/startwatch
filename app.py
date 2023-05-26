@@ -91,7 +91,7 @@ def register():
         session['id'] = new_user[0]
         session['username'] = new_user[1]
         
-        return redirect("/")
+        return redirect("/create_watch")
 
     else:
         return render_template("register.html")
@@ -202,14 +202,15 @@ def create_watch():
             username = session['username']
             user_id = session['id']
             new_watch = request.form['watch_name']
+            goal = request.form['goal']
 
             cursor = conn.cursor()
-            insert_watch = "INSERT INTO watches (username, user_id, watch_name) VALUES (%s, %s, %s)"
-            cursor.execute(insert_watch, (username, user_id, new_watch, ))
+            insert_watch = "INSERT INTO watches (username, user_id, watch_name, goal) VALUES (%s, %s, %s, %s)"
+            cursor.execute(insert_watch, (username, user_id, new_watch, goal, ))
             conn.commit()
             cursor.close()
 
-            return render_template("watches.html")
+            return redirect("/watches")
     else:
         return render_template("create_watch.html")
 
@@ -249,7 +250,7 @@ def visualize():
     watch_name = session["watch_name"]
     user_id = session["id"]
 
-    # get productivity data
+    # get productivity data and goal
     if request.method == "GET":
         cursor = conn.cursor(buffered=True)
         cursor.execute("SELECT date, time_elapsed FROM times WHERE user_id = %s AND watch_name = %s", (user_id, watch_name, ))
@@ -261,9 +262,14 @@ def visualize():
         for i in times:
             timesStr = json.dumps(i, default = str)
             timesArr.append(timesStr)
+        
+        cursor = conn.cursor(buffered=True)
+        cursor.execute("SELECT goal FROM watches WHERE user_id = %s AND watch_name = %s", (user_id, watch_name, ))
+        goal = cursor.fetchone()[0]
+        cursor.close()
 
         # send data for visualization
-        return render_template("visualize.html", times = timesArr, watch_name = watch_name)
+        return render_template("visualize.html", times = timesArr, watch_name = watch_name, goal = goal)
 
 # delete project or edit name
 @app.route("/edit_watch", methods = ["GET", "POST"])
@@ -280,11 +286,13 @@ def edit_watch():
         # delete project from database
         if "delete-submit" in request.form:
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM watches WHERE watch_name = %s AND user_id = %s", (watch_name, user_id, ))
+            cursor.execute("DELETE FROM watches WHERE watch_name = %s AND user_id = %s", 
+                           (watch_name, user_id, ))
             conn.commit()
             cursor.close()
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM times WHERE watch_name = %s AND user_id = %s", (watch_name, user_id, ))
+            cursor.execute("DELETE FROM times WHERE watch_name = %s AND user_id = %s", 
+                           (watch_name, user_id, ))
             conn.commit()
             cursor.close()
             session.pop("watch_name")

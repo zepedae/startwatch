@@ -4,6 +4,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.1/chartjs-adapter-moment.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.2.1/dist/chartjs-plugin-annotation.min.js "></script>
 {% endblock %}  
 
 {% block title %}
@@ -42,10 +43,8 @@
 
     // Create entry for current date to display productivity from start to present day
     const today = moment().format("YYYY/MM/DD");
-    console.log(`"${today}"`);
+
     for(let i = 0; i < dataArr.length; i++){
-        console.log(Object.values(dataArr[i]).includes(`"${today}"`));
-        console.log(i);
         if(Object.values(dataArr[i]).includes(`"${today}"`)){ 
             break; 
         } else {
@@ -58,11 +57,47 @@
         }
     }
 
+    // Create data for goal line
+    const goal = {{ goal | tojson | safe }};
+    let goalArr = [];
+
+    for(let i = 0; i < dataArr.length; i++){
+        const dataObj = {};
+        dataObj["date"] = dataArr[i].date;
+        dataObj["goal"] = goal;
+        goalArr.push(dataObj);
+    }
+    console.log(dataArr);
+    console.log(goalArr);
+
     // Create chart
     new Chart(
     document.getElementById('prod-chart'), {
         type: 'bar',
+        data: {
+            labels: dataArr.map(row => row.date),
+            datasets: [
+                {
+                label: 'Minutes worked',
+                backgroundColor: 'rgb(100, 78, 243)',
+                data: dataArr.map(row => row.time)
+                },
+                {
+                type: 'line',
+                label: 'Productivity goal',
+                data: goalArr.map(row => row.goal),
+                fill: true,
+                borderColor: 'rgb(241, 231, 114)',
+                color: 'rgb(241, 231, 114)'
+                }
+            ]
+        },
         options: {
+            elements: {
+                point:{
+                    radius: 0
+                }
+            },
             scales: {
                 x: {
                     type: "time",
@@ -74,18 +109,10 @@
                             "day": 'MM/DD/YY'
                         }
                     }
-                },
-            }
-        },
-        data: {
-            labels: dataArr.map(row => row.date),
-            datasets: [
-                {
-                label: 'Minutes worked',
-                data: dataArr.map(row => row.time)
                 }
-            ]
+            }
         }
+        
     });
 })();</script>
 {% endblock %}

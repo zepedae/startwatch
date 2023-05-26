@@ -11,7 +11,10 @@
 
     <div class="row text-center">
         <form class="col gy-3" action="/create_watch" method="post">
-            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" id="watch_name" name="watch_name" placeholder="Watch name" type = "text">
+            <input class="new-watch_inp mb-3" autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                id="watch_name" name="watch_name" placeholder="Watch name" type = "text">
+            <input class="new-watch_inp" autocomplete="off" autofocus class="form-control mx-auto w-auto" 
+                id="goal" name="goal" placeholder="Productivity goal (minutes)" type = "number" min="1">
             <button class="btn btn-primary m-3" type="submit" id="new-watch-submit">Add watch</button>
         </form>
     </div>
