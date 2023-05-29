@@ -21,7 +21,7 @@ Startwatch - stopwatch that tracks working time
 Visualize - graph daily working time </br>
 <img src="https://github.com/zepedae/startwatch/assets/112019669/80baab85-3159-4d37-ade9-42c06f46d693" width=70% height=70%>
 
-Edit watch - change the name or working time goal of a watch or delete a watch
+Edit watch - change the name or working-time goal of a watch or delete a watch
 <img src="https://github.com/zepedae/startwatch/assets/112019669/af3065fb-4fbf-40d2-9faf-f8dcb40b951a" width=70% height=70%>
 
 
