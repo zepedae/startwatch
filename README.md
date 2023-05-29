@@ -5,7 +5,7 @@ Startwatch is a time-management tool that uses time-based productivity goals to 
 https://github.com/zepedae/startwatch/assets/112019669/c08c2dc3-d3fb-4432-824b-30052cf917ed
 
 
-## Functionalities
+## Functionality
 Register - register a new account to create "watches" and track productivity
 <img src="https://github.com/zepedae/startwatch/assets/112019669/95346de0-3558-4b87-acd8-8daf248db126" width=70% height=70%>
 
