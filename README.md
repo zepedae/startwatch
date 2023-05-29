@@ -7,8 +7,7 @@ https://github.com/zepedae/startwatch/assets/112019669/c08c2dc3-d3fb-4432-824b-3
 
 ## Functionalities
 Register - register a new account to create "watches" and track productivity
-![Screenshot 2023-05-29 at 12 45 01 PM](https://github.com/zepedae/startwatch/assets/112019669/95346de0-3558-4b87-acd8-8daf248db126)
-<img src="https://github.com/zepedae/startwatch/assets/112019669/95346de0-3558-4b87-acd8-8daf248db126" width=50% height=50%>
+<img src="https://github.com/zepedae/startwatch/assets/112019669/95346de0-3558-4b87-acd8-8daf248db126" width=70% height=70%>
 
 Create new watch - users can create a new watch by entering a name and a working time goal
 ![Screenshot 2023-05-29 at 12 45 58 PM](https://github.com/zepedae/startwatch/assets/112019669/c6131cf0-d645-48df-9c79-fd17e69834d1)
