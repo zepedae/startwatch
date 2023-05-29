@@ -18,7 +18,7 @@ Watches - watches are displayed in tiles along with the options to track, visual
 Startwatch - stopwatch that tracks working time
 <img src="https://github.com/zepedae/startwatch/assets/112019669/79f9274f-065d-4f86-b440-d908bd2f183d" width=70% height=70%>
 
-Visualize - graph daily working time
+Visualize - graph daily working time </br>
 <img src="https://github.com/zepedae/startwatch/assets/112019669/80baab85-3159-4d37-ade9-42c06f46d693" width=70% height=70%>
 
 Edit watch - change the name or working time goal of a watch or delete a watch
