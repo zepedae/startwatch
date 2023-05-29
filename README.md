@@ -7,10 +7,15 @@ https://github.com/zepedae/startwatch/assets/112019669/c08c2dc3-d3fb-4432-824b-3
 
 ## Functionalities
 Register - register a new account to create "watches" and track productivity
+
 Create new watch - users can create a new watch for tracking a project by entering a name and a working time goal for that target
+
 Watches - watches are displayed in tiles along with the options to track, visualize, or edit their data
+
 Startwatch - stopwatch that tracks working time
+
 Visualize - graph daily working time
+
 Edit watch - change the name or working time goal of a watch or delete a watch
 
 ## Demo
