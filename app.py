@@ -283,6 +283,29 @@ def edit_watch():
     
     if request.method == "POST":
         
+        # change project name
+        if "change-name-submit" in request.form:
+            new_name = request.form.get("new-name")
+            cursor = conn.cursor()
+            cursor.execute("UPDATE watches SET watch_name = %s WHERE watch_name = %s AND user_id = %s", (new_name, watch_name, user_id, ))
+            conn.commit()
+            cursor.close()
+            cursor = conn.cursor()
+            cursor.execute("UPDATE times SET watch_name = %s WHERE watch_name = %s AND user_id = %s", (new_name, watch_name, user_id, ))
+            conn.commit()
+            cursor.close()
+            session["watch_name"] = new_name
+            return render_template("edit_watch.html", watch_name = new_name)
+        
+        # change project goal
+        if "change-goal-submit" in request.form:
+            new_goal = request.form.get("new-goal")
+            cursor = conn.cursor()
+            cursor.execute("UPDATE watches SET goal = %s WHERE watch_name = %s AND user_id = %s", (new_goal, watch_name, user_id, ))
+            conn.commit()
+            cursor.close()
+            return render_template("edit_watch.html", watch_name = watch_name)
+        
         # delete project from database
         if "delete-submit" in request.form:
             cursor = conn.cursor()
@@ -298,20 +321,7 @@ def edit_watch():
             session.pop("watch_name")
             return redirect("/watches")
         if "cancel-submit" in request.form:
-            return render_template("edit_watch.html", watch_name = new_name)
-        # change project name
-        if "change-name-submit" in request.form:
-            new_name = request.form.get("new-name")
-            cursor = conn.cursor()
-            cursor.execute("UPDATE watches SET watch_name = %s WHERE watch_name = %s AND user_id = %s", (new_name, watch_name, user_id, ))
-            conn.commit()
-            cursor.close()
-            cursor = conn.cursor()
-            cursor.execute("UPDATE times SET watch_name = %s WHERE watch_name = %s AND user_id = %s", (new_name, watch_name, user_id, ))
-            conn.commit()
-            cursor.close()
-            session["watch_name"] = new_name
-            return render_template("edit_watch.html", watch_name = new_name)
+            return render_template("edit_watch.html", watch_name = watch_name)
 
 if __name__ == "__main__": 
    app.run(debug=True)

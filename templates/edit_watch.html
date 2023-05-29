@@ -54,12 +54,12 @@
     })
 
     // Hide selected edit options
-    document.querySelectorAll('.btn-edit').forEach(item => {
+    document.querySelectorAll('.btn-cancel').forEach(item => {
         item.addEventListener('click', event => {  
             document.querySelectorAll("form").forEach(item => {
                 item.style.display = "none";
             })
-            document.querySelector(".edit-container").style.display = "block";
+            document.querySelector(".edit-container").style.display = "flex";
         })
     })
 
